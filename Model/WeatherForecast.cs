@@ -1,6 +1,6 @@
 using System;
 
-namespace StoreTekPrototype
+namespace StoreTekPrototype.Model
 {
     public class WeatherForecast
     {

@@ -1,0 +1,11 @@
+<h1>Crear Orden</h1>
+
+<form>
+  <div class="form-group">
+    <label for="customerName">Nombre Cliente:</label>
+    <input type="text" class="form-control" id="customerName" [(ngModel)]="customerName" [ngModelOptions]="{standalone: true}" >
+  </div>
+  <button type="button" class="btn btn-primary" (click)="submit()">Enviar</button>
+</form>
+
+<p>{{ feedback }}</p>
