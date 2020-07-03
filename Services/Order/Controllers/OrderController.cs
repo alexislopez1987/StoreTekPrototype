@@ -23,7 +23,7 @@ namespace StoreTekPrototype.Services.Order.Controllers
             _orderRepository = orderRepository;
         }
         [HttpPost]
-        public void CreateOrder(OrderDTO orderDTO)
+        async public Task CreateOrder(OrderDTO orderDTO)
         {
             var order = new Models.Order() 
             { 
@@ -32,7 +32,7 @@ namespace StoreTekPrototype.Services.Order.Controllers
                 CustomerName = orderDTO.CustomerName,
                 CreatedDate = orderDTO.CreatedDate
             };
-            _orderRepository.CreateOrder(order);
+            await _orderRepository.CreateOrder(order);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace StoreTekPrototype.Services.Order.Repository
         {
             _ordersDbContext = ordersDbContext;
         }
-        public void CreateOrder(Models.Order order)
+        async public Task CreateOrder(Models.Order order)
         {
             _ordersDbContext.Orders.Add(order);
-            _ordersDbContext.SaveChanges();
+            await _ordersDbContext.SaveChangesAsync();
         }
     }
 }

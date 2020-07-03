@@ -8,6 +8,6 @@ namespace StoreTekPrototype.Services.Order.Repository
 {
     public interface IOrderRepository
     {
-        void CreateOrder(Models.Order order);
+        Task CreateOrder(Models.Order order);
     }
 }
