@@ -31,6 +31,11 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.create(order).subscribe(result => {
       this.feedback = "OK";
       this.customerName = "";
+
+      setTimeout(() => {
+        this.feedback = "";
+      }, 2000);
+
     });
   }
 
