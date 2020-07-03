@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoreTekPrototype.Services.Models
+namespace StoreTekPrototype.Services.Order.DTO
 {
     public class OrderDetailDTO
     {

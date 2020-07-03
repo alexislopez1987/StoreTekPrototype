@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using StoreTekPrototype.Services.Models;
+using StoreTekPrototype.Services.Order.DTO;
 using StoreTekPrototype.Services.Order.Repository;
+using Models = StoreTekPrototype.Services.Models;
 
 namespace StoreTekPrototype.Services.Order.Controllers
 {
@@ -22,8 +23,15 @@ namespace StoreTekPrototype.Services.Order.Controllers
             _orderRepository = orderRepository;
         }
         [HttpPost]
-        public void CreateOrder(OrderDTO order)
+        public void CreateOrder(OrderDTO orderDTO)
         {
+            var order = new Models.Order() 
+            { 
+                Id = orderDTO.Id,
+                CustomerId = orderDTO.CustomerId,
+                CustomerName = orderDTO.CustomerName,
+                CreatedDate = orderDTO.CreatedDate
+            };
             _orderRepository.CreateOrder(order);
         }
     }

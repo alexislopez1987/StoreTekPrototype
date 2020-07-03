@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StoreTekPrototype.Services.Infrastructure;
 using StoreTekPrototype.Services.Order.Repository;
 
 namespace StoreTekPrototype
@@ -28,6 +30,8 @@ namespace StoreTekPrototype
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddDbContext<OrdersDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddScoped<IOrderRepository, OrderRepository>();
         }
 
@@ -73,6 +77,12 @@ namespace StoreTekPrototype
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<OrdersDbContext>();
+                context.Database.EnsureCreated();
+            }
         }
     }
 }

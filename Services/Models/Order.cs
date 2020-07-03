@@ -5,16 +5,11 @@ using System.Threading.Tasks;
 
 namespace StoreTekPrototype.Services.Models
 {
-    public class OrderDTO
+    public class Order
     {
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public Guid CustomerId { get; set; }
         public string CustomerName { get; set; }
-        //public IEnumerable<OrderDetailDTO> Details { get; set; }
-        public override string ToString()
-        {
-            return $"Order: ID {Id} , CustomerId {CustomerId} , CustomerName {CustomerName} , Date {CreatedDate.ToString("dd/MM/yyyy")} ";
-        }
     }
 }

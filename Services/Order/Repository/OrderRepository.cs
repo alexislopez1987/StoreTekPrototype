@@ -1,4 +1,5 @@
-﻿using StoreTekPrototype.Services.Models;
+﻿using StoreTekPrototype.Services.Infrastructure;
+using Models = StoreTekPrototype.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,15 @@ namespace StoreTekPrototype.Services.Order.Repository
 {
     public class OrderRepository : IOrderRepository
     {
-        public void CreateOrder(OrderDTO order)
+        private readonly OrdersDbContext _ordersDbContext;
+        public OrderRepository(OrdersDbContext ordersDbContext)
         {
-            Console.WriteLine(order.ToString());
+            _ordersDbContext = ordersDbContext;
+        }
+        public void CreateOrder(Models.Order order)
+        {
+            _ordersDbContext.Orders.Add(order);
+            _ordersDbContext.SaveChanges();
         }
     }
 }

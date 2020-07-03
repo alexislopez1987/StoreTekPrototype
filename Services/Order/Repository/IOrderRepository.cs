@@ -1,4 +1,4 @@
-﻿using StoreTekPrototype.Services.Models;
+﻿using Models = StoreTekPrototype.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace StoreTekPrototype.Services.Order.Repository
 {
     public interface IOrderRepository
     {
-        void CreateOrder(OrderDTO order);
+        void CreateOrder(Models.Order order);
     }
 }
