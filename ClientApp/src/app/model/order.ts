@@ -1,6 +1,6 @@
 export class Order {
   Id: string;
-  CreatedDate: string;
+  CreatedDate: Date;
   CustomerId: string;
   CustomerName: string;
 }

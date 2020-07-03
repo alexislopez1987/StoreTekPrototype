@@ -21,9 +21,11 @@ export class CreateOrderComponent implements OnInit {
 
     const order = new Order();
     order.Id = "c00407a3-95cb-44d8-a7f5-a16fcda88d99";
-    order.CreatedDate = "2020-07-02T21:20:46.384Z";
+    order.CreatedDate = new Date();
     order.CustomerId = "37720147-8c2a-4133-b033-204ae90700ed";
     order.CustomerName = this.customerName;
+
+    console.log("CreatedDate: " + order.CreatedDate);
 
     this.orderService.create(order).subscribe(result => {
       this.feedback = "OK";
