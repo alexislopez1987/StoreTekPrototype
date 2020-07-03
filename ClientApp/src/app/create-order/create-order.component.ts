@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { Order } from '../model/order';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-order',
@@ -20,9 +21,9 @@ export class CreateOrderComponent implements OnInit {
     console.log("customer name: " + this.customerName);
 
     const order = new Order();
-    order.Id = "c00407a3-95cb-44d8-a7f5-a16fcda88d99";
+    order.Id = uuidv4();
     order.CreatedDate = new Date();
-    order.CustomerId = "37720147-8c2a-4133-b033-204ae90700ed";
+    order.CustomerId = uuidv4();
     order.CustomerName = this.customerName;
 
     console.log("CreatedDate: " + order.CreatedDate);
