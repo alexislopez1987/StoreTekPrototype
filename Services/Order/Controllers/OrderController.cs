@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreTekPrototype.Services.Order.DTO;
-using StoreTekPrototype.Services.Order.Repository;
+using StoreTekPrototype.Services.Order.Service;
 using Models = StoreTekPrototype.Services.Models;
 
 namespace StoreTekPrototype.Services.Order.Controllers
@@ -15,12 +15,13 @@ namespace StoreTekPrototype.Services.Order.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly IOrderService _orderService;
         private readonly ILogger<OrderDTO> _logger;
-        private readonly IOrderRepository _orderRepository;
-        public OrderController(ILogger<OrderDTO> logger, IOrderRepository orderRepository)
+        
+        public OrderController(ILogger<OrderDTO> logger, IOrderService orderService)
         {
             _logger = logger;
-            _orderRepository = orderRepository;
+            _orderService = orderService;
         }
         [HttpPost]
         async public Task CreateOrder(OrderDTO orderDTO)
@@ -32,7 +33,8 @@ namespace StoreTekPrototype.Services.Order.Controllers
                 CustomerName = orderDTO.CustomerName,
                 CreatedDate = orderDTO.CreatedDate
             };
-            await _orderRepository.CreateOrder(order);
+
+            await _orderService.CreateOrder(order);
         }
     }
 }

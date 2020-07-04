@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,8 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StoreTekPrototype.Services.Billing.Service;
 using StoreTekPrototype.Services.Infrastructure;
 using StoreTekPrototype.Services.Order.Repository;
+using StoreTekPrototype.Services.Order.Service;
 
 namespace StoreTekPrototype
 {
@@ -33,6 +36,22 @@ namespace StoreTekPrototype
             services.AddDbContext<OrdersDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<OrderEnteredConsumer>();
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.ReceiveEndpoint("event-listener", e =>
+                    {
+                        e.ConfigureConsumer<OrderEnteredConsumer>(context);
+                    });
+                });
+            });
+
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
