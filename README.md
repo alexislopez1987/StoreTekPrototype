@@ -1,6 +1,6 @@
 ﻿# Prototype
 
-.net core 3 + angular 8
+.net core 3.1 + angular 8 + RabbitMQ
 
 ## Getting Started
 
