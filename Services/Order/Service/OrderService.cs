@@ -29,5 +29,9 @@ namespace StoreTekPrototype.Services.Order.Service
                 CustomerName = order.CustomerName
             });
         }
+        async public Task<List<Models.Order>> GetOrderByCustomer(Guid customerId)
+        {
+            return await _orderRepository.GetOrderByCustomer(customerId);
+        }
     }
 }

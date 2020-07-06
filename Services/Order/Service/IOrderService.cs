@@ -9,5 +9,6 @@ namespace StoreTekPrototype.Services.Order.Service
     public interface IOrderService
     {
         Task CreateOrder(Models.Order order, IEnumerable<Models.OrderDetail> details);
+        Task<List<Models.Order>> GetOrderByCustomer(Guid customerId);
     }
 }
