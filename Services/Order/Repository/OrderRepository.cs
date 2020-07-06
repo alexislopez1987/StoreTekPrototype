@@ -14,9 +14,10 @@ namespace StoreTekPrototype.Services.Order.Repository
         {
             _ordersDbContext = ordersDbContext;
         }
-        async public Task CreateOrder(Models.Order order)
+        async public Task CreateOrder(Models.Order order, IEnumerable<Models.OrderDetail> details)
         {
             _ordersDbContext.Orders.Add(order);
+            _ordersDbContext.OrderDetails.AddRange(details);
             await _ordersDbContext.SaveChangesAsync();
         }
     }

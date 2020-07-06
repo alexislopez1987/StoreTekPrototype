@@ -26,18 +26,43 @@ namespace StoreTekPrototype.Services.Order.Controllers
         [HttpPost]
         async public Task CreateOrder([FromBody] OrderDTO orderDTO)
         {
-            if (orderDTO.Details != null && orderDTO.Details.Count() > 0)
-                orderDTO.Details.ToList().ForEach(od => od.OrderId = orderDTO.Id);
+            try
+            {
+                if (orderDTO.Details != null && orderDTO.Details.Count() > 0)
+                    orderDTO.Details.ToList().ForEach(od => od.OrderId = orderDTO.Id);
 
-            var order = new Models.Order() 
-            { 
-                Id = orderDTO.Id,
-                CustomerId = orderDTO.CustomerId,
-                CustomerName = orderDTO.CustomerName,
-                CreatedDate = orderDTO.CreatedDate
-            };
+                var order = new Models.Order()
+                {
+                    Id = orderDTO.Id,
+                    CustomerId = orderDTO.CustomerId,
+                    CustomerName = orderDTO.CustomerName,
+                    CreatedDate = orderDTO.CreatedDate,
+                };
 
-            await _orderService.CreateOrder(order);
+                var details = new List<Models.OrderDetail>();
+                foreach (var detail in orderDTO.Details)
+                {
+                    var newDetail = new Models.OrderDetail()
+                    {
+                        Id = detail.Id,
+                        OrderId = detail.OrderId,
+                        ProductId = detail.ProductId,
+                        Quantity = detail.Quantity,
+                        Price = detail.Price
+                    };
+
+                    details.Add(newDetail);
+                }
+
+                //order.Details = details;
+
+                await _orderService.CreateOrder(order, details);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error when create order");
+                throw;
+            }
         }
     }
 }

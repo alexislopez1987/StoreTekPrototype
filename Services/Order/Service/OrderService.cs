@@ -17,8 +17,10 @@ namespace StoreTekPrototype.Services.Order.Service
             _orderRepository = orderRepository;
             _publishEndpoint = publishEndpoint;
         }
-        async public Task CreateOrder(Models.Order order)
+        async public Task CreateOrder(Models.Order order, IEnumerable<Models.OrderDetail> details)
         {
+            await _orderRepository.CreateOrder(order, details);
+
             await _publishEndpoint.Publish<OrderEntered>(new
             {
                 Id = order.Id,
@@ -26,8 +28,6 @@ namespace StoreTekPrototype.Services.Order.Service
                 CustomerId = order.CustomerId,
                 CustomerName = order.CustomerName
             });
-
-            await _orderRepository.CreateOrder(order);
         }
     }
 }
