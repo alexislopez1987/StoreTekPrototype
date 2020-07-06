@@ -42,6 +42,9 @@ export class CreateOrderComponent implements OnInit {
         this.feedback = "";
       }, 2000);
 
+    }, (err) => {
+        this.feedback = "ERROR";
+        console.error(err);
     });
   }
 
