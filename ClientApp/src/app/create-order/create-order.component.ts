@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { Order } from '../model/order';
 import { v4 as uuidv4 } from 'uuid';
+import { OrderDetail } from '../model/order-detail';
 
 @Component({
   selector: 'app-create-order',
@@ -11,6 +12,10 @@ import { v4 as uuidv4 } from 'uuid';
 export class CreateOrderComponent implements OnInit {
   customerName: string;
   feedback: string;
+  products: OrderDetail[] = [
+    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Vino", Qty: 2, Price: 5000 },
+    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Cervezas", Qty: 1, Price: 2000 }
+  ];
 
   constructor(private orderService: OrderService) { }
 

@@ -8,4 +8,31 @@
   <button type="button" class="btn btn-primary" (click)="submit()">Enviar</button>
 </form>
 
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; index as i">
+      <td>
+        {{product.Id}}
+      </td>
+      <td>
+        {{product.ProductName}}
+      </td>
+      <td>
+        {{product.Qty}}
+      </td>
+      <td>
+        {{product.Price}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <p>{{ feedback }}</p>
