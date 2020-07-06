@@ -32,8 +32,6 @@ export class CreateOrderComponent implements OnInit {
     order.CustomerName = this.customerName;
     order.Details = this.products;
 
-    debugger;
-
     console.log("CreatedDate: " + order.CreatedDate);
 
     this.orderService.create(order).subscribe(result => {
