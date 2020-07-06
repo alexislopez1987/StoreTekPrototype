@@ -16,7 +16,8 @@ export class OrderService {
       "Id": order.Id,
       "CreatedDate": order.CreatedDate,
       "CustomerId": order.CustomerId,
-      "CustomerName": order.CustomerName
+      "CustomerName": order.CustomerName,
+      "Details": order.Details, 
     }).pipe(
       map((res: any) => {
         return res;

@@ -12,9 +12,9 @@ import { OrderDetail } from '../model/order-detail';
 export class CreateOrderComponent implements OnInit {
   customerName: string;
   feedback: string;
-  products: OrderDetail[] = [
-    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Vino", Qty: 2, Price: 5000 },
-    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Cervezas", Qty: 1, Price: 2000 }
+  products: Array<OrderDetail> = [
+    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Vino", Quantity: 2, Price: 5000 },
+    { "Id": uuidv4(), "ProductId": uuidv4(), "ProductName": "Cervezas", Quantity: 1, Price: 2000 }
   ];
 
   constructor(private orderService: OrderService) { }
@@ -25,11 +25,14 @@ export class CreateOrderComponent implements OnInit {
   submit() {
     console.log("customer name: " + this.customerName);
 
-    const order = new Order();
+    let order = new Order();
     order.Id = uuidv4();
     order.CreatedDate = new Date();
     order.CustomerId = uuidv4();
     order.CustomerName = this.customerName;
+    order.Details = this.products;
+
+    debugger;
 
     console.log("CreatedDate: " + order.CreatedDate);
 

@@ -24,8 +24,11 @@ namespace StoreTekPrototype.Services.Order.Controllers
             _orderService = orderService;
         }
         [HttpPost]
-        async public Task CreateOrder(OrderDTO orderDTO)
+        async public Task CreateOrder([FromBody] OrderDTO orderDTO)
         {
+            if (orderDTO.Details != null && orderDTO.Details.Count() > 0)
+                orderDTO.Details.ToList().ForEach(od => od.OrderId = orderDTO.Id);
+
             var order = new Models.Order() 
             { 
                 Id = orderDTO.Id,
