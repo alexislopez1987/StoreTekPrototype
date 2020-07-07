@@ -61,7 +61,7 @@ namespace StoreTekPrototype.Services.Order.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error when create order");
+                _logger.LogError(ex, "Error when create order with ID " + orderDTO.Id);
                 throw;
             }
         }
