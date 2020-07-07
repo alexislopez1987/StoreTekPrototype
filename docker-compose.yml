@@ -1,0 +1,65 @@
+﻿version: "3"
+
+services:
+  client:
+    container_name: client
+    build:
+      context: ./ClientApp
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200" 
+      - "49153:49153"
+    volumes:
+      - ./ClientApp:/app
+    links:
+      - server
+    depends_on:
+      - server
+    networks: 
+      - webappnetwork
+
+  server:
+    container_name: server
+    #restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80" 
+      - "443:443"
+    links:
+      - db
+      - rabbitmq
+    depends_on:
+      - db
+      - rabbitmq
+    networks: 
+      - webappnetwork
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: masstransit/rabbitmq:latest
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks: 
+      - webappnetwork
+ 
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: db
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Kc!g2kKL%@W5"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+    networks: 
+      - webappnetwork
+
+networks:
+  webappnetwork:
+    driver: bridge

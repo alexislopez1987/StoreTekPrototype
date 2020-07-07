@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class OrderService {
-  url: string = "https://localhost:44395/api/Order";
+  //url: string = "https://localhost:44395/api/Order";
+  url: string = "/api/Order";
 
   constructor(private http: HttpClient) { }
 

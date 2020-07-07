@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "build:ssr": "ng run StoreTekPrototype:server:dev",
     "test": "ng test",
@@ -32,6 +32,7 @@
     "uuid": "^8.2.0",
     "zone.js": "0.9.1"
   },
+  "proxy": "http://server:80",
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.26",
     "@angular/cli": "^8.3.26",
