@@ -25,4 +25,8 @@ export class OrderService {
       })
     );
   }
+
+  getOrders() {
+    return this.http.get(this.url);
+  }
 }

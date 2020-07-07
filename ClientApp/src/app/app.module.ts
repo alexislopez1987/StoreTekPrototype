@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { GetOrdersComponent } from './get-orders/get-orders.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CreateOrderComponent } from './create-order/create-order.component';
     CounterComponent,
     FetchDataComponent,
     CreateOrderComponent,
+    GetOrdersComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { CreateOrderComponent } from './create-order/create-order.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'create-order', component: CreateOrderComponent },
+      { path: 'get-orders', component: GetOrdersComponent },
     ])
   ],
   providers: [],

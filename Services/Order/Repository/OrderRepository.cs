@@ -26,5 +26,10 @@ namespace StoreTekPrototype.Services.Order.Repository
             var orders = await _ordersDbContext.Orders.Include(o => o.Details).Where(o => o.CustomerId == customerId).ToListAsync();
             return orders;
         }
+        async public Task<List<Models.Order>> GetOrders()
+        {
+            var orders = await _ordersDbContext.Orders.Include(o => o.Details).ToListAsync();
+            return orders;
+        }
     }
 }

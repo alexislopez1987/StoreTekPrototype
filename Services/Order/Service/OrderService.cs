@@ -33,5 +33,9 @@ namespace StoreTekPrototype.Services.Order.Service
         {
             return await _orderRepository.GetOrderByCustomer(customerId);
         }
+        async public Task<List<Models.Order>> GetOrders()
+        {
+            return await _orderRepository.GetOrders();
+        }
     }
 }

@@ -68,13 +68,29 @@ namespace StoreTekPrototype.Services.Order.Controllers
 
         [Route("{customerId}")]
         [HttpGet]
-        async public Task<List<Models.Order>> GetOrderByCustomer(Guid customerId)
+        async public Task<ActionResult<List<Models.Order>>> GetOrderByCustomer(Guid customerId)
         {
             try
             {
                 var orders = await _orderService.GetOrderByCustomer(customerId);
 
-                return orders;
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error when get orders by customer");
+                throw;
+            }
+        }
+
+        [HttpGet]
+        async public Task<ActionResult<List<Models.Order>>> GetOrders()
+        {
+            try
+            {
+                var orders = await _orderService.GetOrders();
+
+                return Ok(orders);
             }
             catch (Exception ex)
             {
