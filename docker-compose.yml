@@ -51,7 +51,7 @@ services:
     ports:
       - "1433:1433"
     environment:
-      SA_PASSWORD: "Kc!g2kKL%@W5"
+      SA_PASSWORD: "Kclg2kKLCaW5"
       ACCEPT_EULA: "Y"
     volumes:
       - ./data:/var/opt/mssql/data
