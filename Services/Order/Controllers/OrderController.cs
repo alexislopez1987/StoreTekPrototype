@@ -57,6 +57,8 @@ namespace StoreTekPrototype.Services.Order.Controllers
 
                 //order.Details = details;
 
+                _logger.LogInformation($"Order {order.Id} about to be created");
+
                 await _orderService.CreateOrder(order, details);
             }
             catch (Exception ex)

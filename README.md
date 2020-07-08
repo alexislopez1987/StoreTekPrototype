@@ -7,6 +7,9 @@
 Just for learning.
 
 ## Prerequisites
-- install sql server
 - install docker
-- docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq
+- run: docker-compose up
+
+
+if you want stop these containers:
+- run: docker-compose down

@@ -29,15 +29,15 @@ services:
       - "443:443"
     links:
       - db
-      - rabbitmq
+      - queue
     depends_on:
       - db
-      - rabbitmq
+      - queue
     networks: 
       - webappnetwork
 
-  rabbitmq:
-    container_name: rabbitmq
+  queue:
+    container_name: queue
     image: masstransit/rabbitmq:latest
     ports:
       - "15672:15672"

@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.Extensions.Logging;
 using StoreTekPrototype.Services.EventContracts;
 using StoreTekPrototype.Services.Order.Repository;
 using System;
@@ -12,14 +13,18 @@ namespace StoreTekPrototype.Services.Order.Service
     {
         readonly IPublishEndpoint _publishEndpoint;
         private readonly IOrderRepository _orderRepository;
-        public OrderService(IOrderRepository orderRepository, IPublishEndpoint publishEndpoint)
+        private readonly ILogger<Models.Order> _logger;
+        public OrderService(IOrderRepository orderRepository, IPublishEndpoint publishEndpoint, ILogger<Models.Order> logger)
         {
             _orderRepository = orderRepository;
             _publishEndpoint = publishEndpoint;
+            _logger = logger;
         }
         async public Task CreateOrder(Models.Order order, IEnumerable<Models.OrderDetail> details)
         {
             await _orderRepository.CreateOrder(order, details);
+
+            _logger.LogInformation($"Order {order.Id} saved");
 
             await _publishEndpoint.Publish<OrderEntered>(new
             {
@@ -28,6 +33,8 @@ namespace StoreTekPrototype.Services.Order.Service
                 CustomerId = order.CustomerId,
                 CustomerName = order.CustomerName
             });
+
+            _logger.LogInformation($"Event order created");
         }
         async public Task<List<Models.Order>> GetOrderByCustomer(Guid customerId)
         {

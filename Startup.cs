@@ -51,6 +51,8 @@ namespace StoreTekPrototype
 
                 x.UsingRabbitMq((context, cfg) =>
                 {
+                    cfg.Host("rabbitmq://queue");
+
                     cfg.ReceiveEndpoint("event-listener", e =>
                     {
                         e.ConfigureConsumer<OrderEnteredConsumer>(context);
